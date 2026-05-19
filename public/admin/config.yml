@@ -4,29 +4,84 @@ backend:
   branch: main
   base_url: https://pulso-cms-auth.vercel.app
 
-locale: pt
-
 media_folder: public/images/posts
 public_folder: /images/posts
 
 collections:
   - name: blog
     label: Posts
+    label_singular: Post
     folder: src/content/blog
     create: true
     slug: "{{slug}}"
+    summary: "{{title}} — {{date}}"
+    preview_path: "/blog/{{slug}}"
     fields:
-      - { label: Título, name: title, widget: string }
-      - { label: Descrição SEO, name: description, widget: text }
-      - { label: Data, name: date, widget: datetime, format: "YYYY-MM-DD" }
-      - { label: Capa, name: cover, widget: image }
+      - label: Título
+        name: title
+        widget: string
+        hint: "Título principal do post. Seja direto e descritivo."
+
+      - label: Descrição SEO
+        name: description
+        widget: text
+        hint: "Resumo para o Google e redes sociais. Ideal entre 140 e 160 caracteres."
+
+      - label: Data de Publicação
+        name: date
+        widget: datetime
+        format: "YYYY-MM-DD"
+        date_format: "DD/MM/YYYY"
+        time_format: false
+        hint: "Data em que o post será publicado no blog."
+
+      - label: Imagem de Capa
+        name: cover
+        widget: image
+        hint: "Use uma imagem no formato JPG ou PNG. Nome do arquivo deve ser o slug do post (ex: meu-post.jpg)."
+
       - label: Categoria
         name: category
         widget: select
-        options: ["EDI", "Produtividade", "Tecnologia"]
-      - { label: Tags, name: tags, widget: list }
-      - { label: Autor, name: author, widget: string, default: "Thiago Abreu" }
-      - { label: Tempo de leitura (min), name: readTime, widget: number, default: 5 }
-      - { label: Post em destaque, name: featured, widget: boolean, default: false }
-      - { label: Rascunho, name: draft, widget: boolean, default: false }
-      - { label: Conteúdo, name: body, widget: markdown }
+        options:
+          - { label: "EDI — Integração e sistemas B2B", value: "EDI" }
+          - { label: "Produtividade — Ferramentas e automação", value: "Produtividade" }
+          - { label: "Tecnologia — Tendências e tutoriais", value: "Tecnologia" }
+        hint: "Escolha a categoria que melhor representa o tema do post."
+
+      - label: Tags
+        name: tags
+        widget: list
+        hint: "Palavras-chave separadas por vírgula (ex: EDI, integração, B2B)."
+
+      - label: Autor
+        name: author
+        widget: string
+        default: "Thiago Abreu"
+        hint: "Nome do autor do post."
+
+      - label: Tempo de leitura (minutos)
+        name: readTime
+        widget: number
+        default: 5
+        value_type: int
+        min: 1
+        max: 60
+        hint: "Estimativa de quantos minutos leva para ler o post. Média: 200 palavras/min."
+
+      - label: Post em Destaque
+        name: featured
+        widget: boolean
+        default: false
+        hint: "Ative para exibir este post em destaque na página inicial."
+
+      - label: Rascunho
+        name: draft
+        widget: boolean
+        default: false
+        hint: "Ative para salvar sem publicar. Rascunhos não aparecem no blog."
+
+      - label: Conteúdo
+        name: body
+        widget: markdown
+        hint: "Escreva o conteúdo completo do post aqui. Use a barra de ferramentas para formatar."
