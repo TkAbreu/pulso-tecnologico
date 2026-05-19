@@ -1,0 +1,64 @@
+---
+const { post } = Astro.props;
+
+const date = new Date(post.data.date).toLocaleDateString('pt-BR', {
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric',
+});
+
+const categorySlug = post.data.category
+  .toLowerCase()
+  .normalize('NFD')
+  .replace(/[̀-ͯ]/g, '');
+---
+
+<header class="mb-4">
+  <div class="flex items-center gap-3 mb-5 flex-wrap">
+    <a
+      href={`/categoria/${categorySlug}`}
+      class="bg-[#00c896]/10 text-[#00c896] text-xs font-semibold px-3 py-1 rounded-full hover:bg-[#00c896]/20 transition-colors"
+    >
+      {post.data.category}
+    </a>
+    <time datetime={post.data.date.toISOString()} class="text-[#c8d8d0] text-sm">
+      {date}
+    </time>
+    <span class="text-[#c8d8d0]/40">·</span>
+    <span class="text-[#c8d8d0] text-sm">{post.data.readTime} min de leitura</span>
+  </div>
+
+  <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[#e8f4f0] leading-tight mb-5">
+    {post.data.title}
+  </h1>
+
+  <p class="text-[#c8d8d0] text-lg md:text-xl leading-relaxed mb-7">
+    {post.data.description}
+  </p>
+
+  <div class="flex items-center gap-3 pb-7 border-b border-[#0f2420]">
+    <div
+      class="w-10 h-10 rounded-full bg-[#0f2420] border border-[#00c896]/30 flex items-center justify-center text-[#00c896] font-bold text-sm shrink-0"
+      aria-hidden="true"
+    >
+      TA
+    </div>
+    <div>
+      <p class="text-[#e8f4f0] text-sm font-semibold">{post.data.author}</p>
+      <p class="text-[#c8d8d0] text-xs">Analista de Sistemas EDI</p>
+    </div>
+  </div>
+
+  {post.data.cover && (
+    <div class="mt-5 rounded-xl overflow-hidden bg-[#0f2420]">
+      <img
+        src={post.data.cover}
+        alt={`Imagem de capa: ${post.data.title}`}
+        class="w-full aspect-video object-cover"
+        width="1200"
+        height="675"
+        loading="eager"
+      />
+    </div>
+  )}
+</header>

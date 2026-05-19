@@ -1,0 +1,120 @@
+---
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/categoria/edi', label: 'EDI' },
+  { href: '/categoria/produtividade', label: 'Produtividade' },
+  { href: '/categoria/tecnologia', label: 'Tecnologia' },
+  { href: '/sobre', label: 'Sobre' },
+];
+
+const currentPath = Astro.url.pathname;
+
+const isActive = (href) => {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+};
+---
+
+<!-- Barra de progresso de leitura CSS-only (Scroll-driven) -->
+<div class="reading-progress-bar" aria-hidden="true"></div>
+
+<header class="border-b border-[#0f2420] sticky top-0 z-50 bg-[#0a1a16]/95 backdrop-blur-sm">
+
+  <!-- Checkbox CSS-only para menu mobile -->
+  <input type="checkbox" id="nav-toggle" class="sr-only peer/nav" aria-hidden="true" />
+
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+
+    <!-- Logo: "Pulso" branco itálico serifado + "Tecnológico" verde esmeralda -->
+    <a href="/" class="flex items-center group" aria-label="Pulso Tecnológico — página inicial">
+      <span class="text-2xl font-bold tracking-tight leading-none">
+        <em class="text-[#e8f4f0] not-italic font-serif italic">Pulso</em>
+        <span class="text-[#00c896] ml-1">Tecnológico</span>
+      </span>
+    </a>
+
+    <!-- Navegação desktop -->
+    <nav class="hidden md:flex items-center gap-1" aria-label="Navegação principal">
+      {navLinks.map(({ href, label }) => (
+        <a
+          href={href}
+          class={`relative text-sm font-medium px-3 py-2 rounded-lg transition-colors duration-200 ${
+            isActive(href)
+              ? 'text-[#00c896]'
+              : 'text-[#c8d8d0] hover:text-[#00c896] hover:bg-[#00c896]/5'
+          }`}
+          aria-current={isActive(href) ? 'page' : undefined}
+        >
+          {label}
+          {isActive(href) && (
+            <span
+              class="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#00c896]"
+              aria-hidden="true"
+            ></span>
+          )}
+        </a>
+      ))}
+    </nav>
+
+    <!-- CTA Newsletter desktop -->
+    <a
+      href="/newsletter"
+      class="hidden lg:inline-flex items-center gap-1.5 bg-[#00c896]/10 hover:bg-[#00c896]/20 text-[#00c896] text-xs font-bold px-4 py-2 rounded-full border border-[#00c896]/20 hover:border-[#00c896]/40 transition-all duration-200"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+      Newsletter
+    </a>
+
+    <!-- Botão hamburger mobile (CSS-only) -->
+    <label
+      for="nav-toggle"
+      class="md:hidden cursor-pointer p-2 text-[#c8d8d0] hover:text-[#00c896] transition-colors"
+      aria-label="Abrir menu de navegação"
+    >
+      <!-- Ícone hambúrguer -->
+      <svg class="peer-checked/nav:hidden block" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </label>
+
+  </div>
+
+  <!-- Menu mobile (mostrado ao marcar o checkbox) -->
+  <nav
+    class="hidden peer-checked/nav:block md:hidden border-t border-[#0f2420] bg-[#0a1a16]"
+    aria-label="Menu mobile"
+  >
+    <ul class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-1">
+      {navLinks.map(({ href, label }) => (
+        <li>
+          <a
+            href={href}
+            class={`block text-sm font-medium px-4 py-3 rounded-lg transition-colors duration-200 ${
+              isActive(href)
+                ? 'text-[#00c896] bg-[#00c896]/5'
+                : 'text-[#c8d8d0] hover:text-[#00c896] hover:bg-[#00c896]/5'
+            }`}
+            aria-current={isActive(href) ? 'page' : undefined}
+          >
+            {label}
+          </a>
+        </li>
+      ))}
+      <li class="pt-2 border-t border-[#0f2420] mt-2">
+        <a
+          href="/newsletter"
+          class="block text-sm font-bold px-4 py-3 rounded-lg text-[#00c896] hover:bg-[#00c896]/5 transition-colors"
+        >
+          Newsletter →
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+</header>

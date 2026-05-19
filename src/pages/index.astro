@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const sorted = allPosts.sort((a, b) => b.data.date - a.data.date);
+
+const featuredPost = sorted.find((p) => p.data.featured) ?? sorted[0];
+const recentPosts = sorted.filter((p) => p.id !== featuredPost?.id).slice(0, 6);
+const featuredSlug = featuredPost?.id.replace(/\.md$/, '');
+
+const featuredDate = featuredPost
+  ? new Date(featuredPost.data.date).toLocaleDateString('pt-BR', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    })
+  : '';
+
+const categories = [
+  {
+    name: 'EDI',
+    href: '/categoria/edi',
+    desc: 'Electronic Data Interchange, integração B2B e sistemas legados.',
+    icon: '⇄',
+    accent: 'border-cyan-500/30 hover:border-cyan-400/50',
+    label: 'text-cyan-300',
+    bg: 'hover:bg-cyan-950/40',
+  },
+  {
+    name: 'Produtividade',
+    href: '/categoria/produtividade',
+    desc: 'Ferramentas, automação e estratégias para trabalhar melhor.',
+    icon: '◎',
+    accent: 'border-amber-500/30 hover:border-amber-400/50',
+    label: 'text-amber-300',
+    bg: 'hover:bg-amber-950/40',
+  },
+  {
+    name: 'Tecnologia',
+    href: '/categoria/tecnologia',
+    desc: 'Tendências, análises e tutoriais sobre o universo tech.',
+    icon: '◈',
+    accent: 'border-violet-500/30 hover:border-violet-400/50',
+    label: 'text-violet-300',
+    bg: 'hover:bg-violet-950/40',
+  },
+];
+---
+
+<BaseLayout
+  title="O pulso da tecnologia"
+  description="Artigos sobre EDI, produtividade e tendências tech em português, por Thiago Abreu."
+  type="website"
+>
+  <div class="max-w-6xl mx-auto px-4 py-12">
+
+    <!-- ── Post em Destaque ─────────────────────────────────────────── -->
+    {featuredPost && (
+      <section class="mb-16 animate-fade-in" aria-label="Post em destaque">
+        <div class="relative rounded-2xl overflow-hidden bg-[#0f2420] border border-[#0f2420] hover:border-[#00c896]/30 hover:shadow-[0_8px_40px_rgba(0,200,150,0.08)] transition-all duration-300 group">
+          <a href={`/blog/${featuredSlug}`} class="block">
+
+            <!-- Layout responsivo: empilhado no mobile, lado a lado no md+ -->
+            <div class="grid md:grid-cols-2 gap-0">
+
+              <!-- Imagem com overlay gradient em mobile -->
+              <div class="relative aspect-[3/2] md:aspect-auto overflow-hidden md:min-h-[300px] bg-[#0f2420]">
+                <img
+                  src={featuredPost.data.cover}
+                  alt={featuredPost.data.title}
+                  class="absolute inset-0 w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                  width="1536"
+                  height="1024"
+                  loading="eager"
+                />
+                <!-- Overlay gradient em mobile: título sobrepõe a imagem -->
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0f2420] via-[#0f2420]/60 to-transparent md:hidden flex flex-col justify-end p-6">
+                  <div class="flex items-center gap-2 mb-3 flex-wrap">
+                    <span class="bg-[#00c896] text-[#0a1a16] text-xs font-bold px-3 py-1 rounded-full">Destaque</span>
+                    <span class="bg-[#00c896]/10 text-[#00c896] text-xs font-semibold px-3 py-1 rounded-full">{featuredPost.data.category}</span>
+                  </div>
+                  <h1 class="text-xl font-bold text-[#e8f4f0] leading-tight mb-2 group-hover:text-[#00c896] transition-colors">
+                    {featuredPost.data.title}
+                  </h1>
+                  <div class="flex items-center gap-3 text-[#c8d8d0] text-xs">
+                    <time datetime={featuredPost.data.date.toISOString()}>{featuredDate}</time>
+                    <span>·</span>
+                    <span>{featuredPost.data.readTime} min de leitura</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Conteúdo textual — visível apenas em md+ -->
+              <div class="hidden md:flex p-8 md:p-12 flex-col justify-center">
+                <div class="flex items-center gap-3 mb-5 flex-wrap">
+                  <span class="bg-[#00c896] text-[#0a1a16] text-xs font-bold px-3 py-1 rounded-full">
+                    Destaque
+                  </span>
+                  <span class="bg-[#00c896]/10 text-[#00c896] text-xs font-semibold px-3 py-1 rounded-full">
+                    {featuredPost.data.category}
+                  </span>
+                </div>
+                <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#e8f4f0] leading-tight mb-4 group-hover:text-[#00c896] transition-colors">
+                  {featuredPost.data.title}
+                </h1>
+                <p class="text-[#c8d8d0] leading-relaxed mb-6 line-clamp-3">
+                  {featuredPost.data.description}
+                </p>
+                <div class="flex items-center gap-4 text-[#c8d8d0] text-sm">
+                  <time datetime={featuredPost.data.date.toISOString()}>{featuredDate}</time>
+                  <span>·</span>
+                  <span>{featuredPost.data.readTime} min de leitura</span>
+                </div>
+              </div>
+
+            </div>
+          </a>
+        </div>
+      </section>
+    )}
+
+    <!-- ── Últimos Artigos ──────────────────────────────────────────── -->
+    {recentPosts.length > 0 && (
+      <section class="mb-16" aria-label="Últimos artigos">
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-2xl font-bold text-[#e8f4f0]">Últimos Artigos</h2>
+          <a href="/blog" class="text-[#00c896] hover:text-[#00e5a0] text-sm font-medium transition-colors">
+            Ver todos →
+          </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {recentPosts.map((post) => (
+            <PostCard post={post} />
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- ── Categorias ───────────────────────────────────────────────── -->
+    <section class="mb-16" aria-label="Categorias do blog">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-2xl font-bold text-[#e8f4f0]">Explore por Categoria</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        {categories.map((cat) => (
+          <a
+            href={cat.href}
+            class={`bg-[#0f2420] rounded-xl p-6 border ${cat.accent} ${cat.bg} transition-all duration-200 group block`}
+          >
+            <span class="text-2xl mb-3 block" aria-hidden="true">{cat.icon}</span>
+            <h3 class={`font-bold text-lg mb-2 ${cat.label} group-hover:brightness-110 transition-all`}>
+              {cat.name}
+            </h3>
+            <p class="text-[#c8d8d0] text-sm leading-relaxed">{cat.desc}</p>
+            <span class={`inline-flex items-center gap-1 mt-4 text-xs font-medium ${cat.label} opacity-70 group-hover:opacity-100 transition-opacity`}>
+              Ver artigos
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- ── CTA Newsletter ───────────────────────────────────────────── -->
+    <section class="bg-[#0f2420] rounded-2xl border border-[#00c896]/15 p-8 md:p-14 text-center" aria-label="Inscrição na newsletter">
+      <p class="text-[#00c896] text-xs font-bold uppercase tracking-widest mb-3">Newsletter</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-[#e8f4f0] mb-4">
+        Fique por dentro das novidades
+      </h2>
+      <p class="text-[#c8d8d0] max-w-xl mx-auto mb-8 leading-relaxed">
+        Receba os melhores artigos sobre EDI, produtividade e tecnologia diretamente no seu
+        e-mail toda semana. Sem spam. Cancelamento a qualquer momento.
+      </p>
+      <a
+        href="/newsletter"
+        class="inline-flex items-center gap-2 bg-[#00c896] hover:bg-[#00e5a0] text-[#0a1a16] font-bold px-8 py-3.5 rounded-full transition-colors"
+      >
+        Inscrever-se gratuitamente
+      </a>
+    </section>
+
+  </div>
+</BaseLayout>

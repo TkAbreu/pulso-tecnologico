@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Newsletter"
+  description="Inscreva-se na newsletter do Pulso Tecnológico e receba artigos sobre EDI, produtividade e tecnologia direto no seu e-mail, sem spam."
+>
+  <div class="max-w-2xl mx-auto px-4 py-20 text-center">
+    <div class="bg-[#0f2420] rounded-2xl border border-[#00c896]/15 p-10 md:p-14">
+
+      <p class="text-[#00c896] text-xs font-bold uppercase tracking-widest mb-4">Newsletter</p>
+
+      <h1 class="text-4xl font-bold text-[#e8f4f0] mb-4 leading-tight">
+        O pulso direto<br />no seu e-mail
+      </h1>
+
+      <p class="text-[#c8d8d0] text-lg leading-relaxed mb-8">
+        Toda semana, os melhores artigos sobre EDI, produtividade e tecnologia
+        chegam para você antes de todo mundo. Sem enrolação. Sem spam.
+        Cancelamento a qualquer momento.
+      </p>
+
+      <!-- Formulário de inscrição -->
+      <!-- Substitua a action pelo endpoint do seu provedor de newsletter (Mailchimp, ConvertKit, etc.) -->
+      <form
+        class="flex flex-col sm:flex-row gap-3 mb-6"
+        action="#"
+        method="post"
+      >
+        <label for="newsletter-email" class="sr-only">Seu e-mail</label>
+        <input
+          id="newsletter-email"
+          type="email"
+          name="email"
+          placeholder="seu@email.com"
+          required
+          class="flex-1 bg-[#0a1a16] border border-[#00c896]/25 text-[#e8f4f0] placeholder-[#c8d8d0]/40 px-5 py-3 rounded-full focus:outline-none focus:border-[#00c896] transition-colors text-sm"
+        />
+        <button
+          type="submit"
+          class="bg-[#00c896] hover:bg-[#00e5a0] text-[#0a1a16] font-bold px-8 py-3 rounded-full transition-colors whitespace-nowrap text-sm"
+        >
+          Inscrever-se
+        </button>
+      </form>
+
+      <p class="text-[#c8d8d0]/50 text-xs mb-10">
+        Ao se inscrever, você concorda com nossa
+        <a href="/politica-de-privacidade" class="text-[#00c896] hover:underline">Política de Privacidade</a>.
+      </p>
+
+      <!-- Benefícios -->
+      <div class="grid grid-cols-3 gap-4 pt-8 border-t border-[#0a1a16]">
+        {[
+          { num: '3×', label: 'por semana' },
+          { num: '100%', label: 'gratuito' },
+          { num: '0', label: 'spam' },
+        ].map((item) => (
+          <div>
+            <p class="text-[#00c896] text-2xl font-bold">{item.num}</p>
+            <p class="text-[#c8d8d0] text-xs mt-0.5">{item.label}</p>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>

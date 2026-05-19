@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contato"
+  description="Entre em contato com o Pulso Tecnológico. Sugestões de pauta, dúvidas sobre EDI, parcerias ou qualquer outra mensagem para Thiago Abreu."
+>
+  <div class="max-w-2xl mx-auto px-4 py-16">
+
+    <h1 class="text-4xl font-bold text-[#e8f4f0] mb-4">Contato</h1>
+    <p class="text-[#c8d8d0] mb-2 leading-relaxed">
+      Tem uma sugestão de pauta, uma dúvida sobre EDI ou quer discutir uma parceria?
+      Manda uma mensagem — respondo em até <strong class="text-[#e8f4f0]">48 horas</strong>.
+    </p>
+    <p class="text-[#c8d8d0]/70 text-sm mb-10">
+      Ou direto por e-mail:
+      <a
+        href="mailto:contato@pulsotecnologico.com.br"
+        class="text-[#00c896] hover:text-[#00e5a0] transition-colors font-medium"
+      >
+        contato@pulsotecnologico.com.br
+      </a>
+    </p>
+
+    <div class="bg-[#0f2420] rounded-2xl p-8 md:p-10 border border-[#00c896]/10">
+
+      <!-- Substitua action pelo seu backend, Formspree ou Netlify Forms -->
+      <form class="space-y-5" action="#" method="post">
+
+        <div>
+          <label class="block text-[#c8d8d0] text-sm font-medium mb-2" for="contact-name">
+            Nome <span class="text-[#00c896]" aria-hidden="true">*</span>
+          </label>
+          <input
+            id="contact-name"
+            type="text"
+            name="name"
+            required
+            autocomplete="name"
+            class="w-full bg-[#0a1a16] border border-[#00c896]/15 text-[#e8f4f0] placeholder-[#c8d8d0]/30 px-4 py-3 rounded-lg focus:outline-none focus:border-[#00c896]/60 transition-colors duration-200 text-sm"
+            placeholder="Seu nome completo"
+          />
+        </div>
+
+        <div>
+          <label class="block text-[#c8d8d0] text-sm font-medium mb-2" for="contact-email">
+            E-mail <span class="text-[#00c896]" aria-hidden="true">*</span>
+          </label>
+          <input
+            id="contact-email"
+            type="email"
+            name="email"
+            required
+            autocomplete="email"
+            class="w-full bg-[#0a1a16] border border-[#00c896]/15 text-[#e8f4f0] placeholder-[#c8d8d0]/30 px-4 py-3 rounded-lg focus:outline-none focus:border-[#00c896]/60 transition-colors duration-200 text-sm"
+            placeholder="seu@email.com"
+          />
+        </div>
+
+        <div>
+          <label class="block text-[#c8d8d0] text-sm font-medium mb-2" for="contact-subject">
+            Assunto <span class="text-[#00c896]" aria-hidden="true">*</span>
+          </label>
+          <select
+            id="contact-subject"
+            name="subject"
+            required
+            class="w-full bg-[#0a1a16] border border-[#00c896]/15 text-[#c8d8d0] px-4 py-3 rounded-lg focus:outline-none focus:border-[#00c896]/60 transition-colors duration-200 text-sm appearance-none cursor-pointer"
+          >
+            <option value="" disabled selected>Selecione um assunto</option>
+            <option value="sugestao-pauta">Sugestão de pauta</option>
+            <option value="duvida-edi">Dúvida sobre EDI</option>
+            <option value="parceria">Parceria</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-[#c8d8d0] text-sm font-medium mb-2" for="contact-message">
+            Mensagem <span class="text-[#00c896]" aria-hidden="true">*</span>
+          </label>
+          <textarea
+            id="contact-message"
+            name="message"
+            rows="5"
+            required
+            class="w-full bg-[#0a1a16] border border-[#00c896]/15 text-[#e8f4f0] placeholder-[#c8d8d0]/30 px-4 py-3 rounded-lg focus:outline-none focus:border-[#00c896]/60 transition-colors duration-200 text-sm resize-none"
+            placeholder="Escreva sua mensagem..."
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-[#00c896] hover:bg-[#00e5a0] text-[#0a1a16] font-bold py-3.5 rounded-full transition-colors duration-200 text-sm"
+        >
+          Enviar Mensagem
+        </button>
+
+      </form>
+
+      <p class="text-[#c8d8d0]/40 text-xs text-center mt-5">
+        Ao enviar, você concorda com nossa
+        <a href="/politica-de-privacidade" class="text-[#00c896]/70 hover:text-[#00c896] transition-colors">Política de Privacidade</a>.
+      </p>
+
+    </div>
+  </div>
+</BaseLayout>

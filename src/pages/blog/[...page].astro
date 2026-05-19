@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths({ paginate }) {
+  const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+  const sorted = allPosts.sort((a, b) => b.data.date - a.data.date);
+  return paginate(sorted, { pageSize: 9 });
+}
+
+const { page } = Astro.props;
+const pageTitle =
+  page.currentPage === 1 ? 'Blog' : `Blog — Página ${page.currentPage}`;
+---
+
+<BaseLayout
+  title={pageTitle}
+  description="Artigos sobre EDI, produtividade e tendências tecnológicas em português, por Thiago Abreu."
+>
+  <div class="max-w-6xl mx-auto px-4 py-4">
+
+    <div class="flex items-baseline justify-between mb-5">
+      <h1 class="text-4xl font-bold text-[#e8f4f0]">Blog</h1>
+      <span class="text-[#c8d8d0] text-sm">
+        {page.total} artigo{page.total !== 1 ? 's' : ''}
+      </span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      {page.data.map((post) => (
+        <PostCard post={post} />
+      ))}
+    </div>
+
+    <!-- Paginação -->
+    {(page.url.prev || page.url.next) && (
+      <nav class="flex items-center justify-center gap-4" aria-label="Paginação">
+        {page.url.prev ? (
+          <a
+            href={page.url.prev}
+            class="px-6 py-2.5 bg-[#0f2420] text-[#c8d8d0] hover:text-[#00c896] rounded-full border border-[#0f2420] hover:border-[#00c896]/30 transition-all text-sm font-medium"
+          >
+            ← Anterior
+          </a>
+        ) : (
+          <span class="px-6 py-2.5 text-[#c8d8d0]/25 text-sm">← Anterior</span>
+        )}
+
+        <span class="text-[#c8d8d0] text-sm">
+          {page.currentPage} / {page.lastPage}
+        </span>
+
+        {page.url.next ? (
+          <a
+            href={page.url.next}
+            class="px-6 py-2.5 bg-[#0f2420] text-[#c8d8d0] hover:text-[#00c896] rounded-full border border-[#0f2420] hover:border-[#00c896]/30 transition-all text-sm font-medium"
+          >
+            Próxima →
+          </a>
+        ) : (
+          <span class="px-6 py-2.5 text-[#c8d8d0]/25 text-sm">Próxima →</span>
+        )}
+      </nav>
+    )}
+
+  </div>
+</BaseLayout>

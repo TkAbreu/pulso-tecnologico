@@ -1,0 +1,110 @@
+---
+const year = new Date().getFullYear();
+
+const blog = [
+  { href: '/blog', label: 'Todos os Artigos' },
+  { href: '/categoria/edi', label: 'EDI' },
+  { href: '/categoria/produtividade', label: 'Produtividade' },
+  { href: '/categoria/tecnologia', label: 'Tecnologia' },
+];
+
+const institucional = [
+  { href: '/sobre', label: 'Quem Somos' },
+  { href: '/contato', label: 'Contato' },
+  { href: '/newsletter', label: 'Newsletter' },
+  { href: '/politica-de-privacidade', label: 'Política de Privacidade' },
+  { href: '/termos-de-uso', label: 'Termos de Uso' },
+  { href: '/rss.xml', label: 'Feed RSS' },
+];
+---
+
+<footer class="border-t-2 border-[#00c896]/60 mt-20 bg-[#0a1a16]">
+  <div class="max-w-6xl mx-auto px-4 pt-14 pb-10">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+
+      <!-- Coluna 1: Identidade -->
+      <div class="sm:col-span-2 lg:col-span-1">
+        <a href="/" class="inline-block mb-4" aria-label="Pulso Tecnológico">
+          <span class="text-xl font-bold leading-none">
+            <em class="text-[#e8f4f0] not-italic font-serif italic">Pulso</em>
+            <span class="text-[#00c896]"> Tecnológico</span>
+          </span>
+        </a>
+        <p class="text-[#c8d8d0] text-sm leading-relaxed mb-5 max-w-xs">
+          O pulso da tecnologia. Artigos sobre EDI, produtividade e tendências tech
+          por Thiago Abreu, Analista de Sistemas EDI.
+        </p>
+        <!-- Espaço redes sociais (a definir) -->
+        <div class="flex gap-3" aria-label="Redes sociais">
+          <!-- Social icons serão adicionados quando definidos -->
+        </div>
+      </div>
+
+      <!-- Coluna 2: Blog -->
+      <div>
+        <h3 class="text-[#e8f4f0] font-semibold mb-4 text-xs uppercase tracking-widest">
+          Blog
+        </h3>
+        <ul class="space-y-2.5">
+          {blog.map(({ href, label }) => (
+            <li>
+              <a href={href} class="text-[#c8d8d0] hover:text-[#00c896] text-sm transition-colors duration-200">
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Coluna 3: Institucional -->
+      <div>
+        <h3 class="text-[#e8f4f0] font-semibold mb-4 text-xs uppercase tracking-widest">
+          Institucional
+        </h3>
+        <ul class="space-y-2.5">
+          {institucional.map(({ href, label }) => (
+            <li>
+              <a href={href} class="text-[#c8d8d0] hover:text-[#00c896] text-sm transition-colors duration-200">
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Coluna 4: Newsletter -->
+      <div>
+        <h3 class="text-[#e8f4f0] font-semibold mb-4 text-xs uppercase tracking-widest">
+          Newsletter
+        </h3>
+        <p class="text-[#c8d8d0] text-sm leading-relaxed mb-4">
+          Receba os melhores artigos de tech toda semana no seu e-mail.
+        </p>
+        <a
+          href="/newsletter"
+          class="inline-flex items-center gap-1.5 bg-[#00c896] hover:bg-[#00e5a0] text-[#0a1a16] text-xs font-bold px-5 py-2.5 rounded-full transition-colors duration-200"
+        >
+          Inscrever-se
+          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="border-t border-[#0f2420] pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-[#c8d8d0] text-sm">
+        © {year} Pulso Tecnológico — por
+        <a href="/sobre" class="text-[#00c896] hover:text-[#00e5a0] transition-colors duration-200">Thiago Abreu</a>.
+        Todos os direitos reservados.
+      </p>
+      <p class="text-[#c8d8d0]/40 text-xs">
+        Feito com <a href="https://astro.build" class="hover:text-[#00c896] transition-colors duration-200" rel="noopener noreferrer" target="_blank">Astro</a>
+        &amp; Tailwind CSS
+      </p>
+    </div>
+
+  </div>
+</footer>

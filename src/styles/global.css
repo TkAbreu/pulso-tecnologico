@@ -1,0 +1,273 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: #0a1a16;
+  --color-bg-card: #0f2420;
+  --color-emerald: #00c896;
+  --color-emerald-bright: #00e5a0;
+  --color-text-primary: #e8f4f0;
+  --color-text-muted: #c8d8d0;
+}
+
+/* ─── Base ──────────────────────────────────────────────────────────── */
+
+body {
+  background-color: #0a1a16;
+  color: #e8f4f0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Seleção de texto com cor de marca */
+::selection {
+  background-color: #00c896;
+  color: #0a1a16;
+}
+
+/* Scrollbar customizada */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a1a16;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0f2420;
+  border-radius: 4px;
+  border: 2px solid #0a1a16;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00c896;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #0f2420 #0a1a16;
+}
+
+/* ─── Animações de entrada ───────────────────────────────────────────── */
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease forwards;
+}
+
+/* Escalonamento de delay para listas de cards */
+.animate-fade-in-up:nth-child(1) { animation-delay: 0ms; }
+.animate-fade-in-up:nth-child(2) { animation-delay: 80ms; }
+.animate-fade-in-up:nth-child(3) { animation-delay: 160ms; }
+.animate-fade-in-up:nth-child(4) { animation-delay: 240ms; }
+.animate-fade-in-up:nth-child(5) { animation-delay: 320ms; }
+.animate-fade-in-up:nth-child(6) { animation-delay: 400ms; }
+
+/* ─── Barra de progresso de leitura (CSS-only) ───────────────────────── */
+
+@keyframes reading-progress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+.reading-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #00c896, #00e5a0);
+  z-index: 9999;
+  animation: reading-progress linear;
+  animation-timeline: scroll(root block);
+  transform-origin: left;
+}
+
+/* Fallback para browsers sem animation-timeline: scroll() */
+@supports not (animation-timeline: scroll()) {
+  .reading-progress-bar {
+    display: none;
+  }
+}
+
+/* ─── Prose (conteúdo markdown dos posts) ───────────────────────────── */
+
+.prose {
+  color: #e8f4f0;
+}
+
+.prose h2,
+.prose h3,
+.prose h4 {
+  color: #e8f4f0;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.prose h2 { font-size: 1.75rem; font-weight: 700; }
+.prose h3 { font-size: 1.375rem; font-weight: 600; }
+
+.prose p {
+  color: #c8d8d0;
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+  text-align: justify;
+}
+
+.prose a {
+  color: #00c896;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose a:hover {
+  color: #00e5a0;
+}
+
+.prose strong {
+  color: #e8f4f0;
+  font-weight: 600;
+}
+
+.prose ul,
+.prose ol {
+  color: #c8d8d0;
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+  line-height: 1.7;
+}
+
+.prose code {
+  background-color: #0f2420;
+  color: #00c896;
+  padding: 0.125rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.prose pre {
+  background-color: #0f2420;
+  border: 1px solid rgba(0, 200, 150, 0.2);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+  color: #e8f4f0;
+}
+
+.prose blockquote {
+  border-left: 3px solid #00c896;
+  color: #c8d8d0;
+  padding-left: 1.25rem;
+  margin-left: 0;
+  font-style: italic;
+}
+
+.prose hr {
+  border-color: #0f2420;
+  margin: 2rem 0;
+}
+
+.prose img {
+  border-radius: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+/* ─── Slots AdSense — não remover nem renomear ───────────────────────── */
+
+/* Sem conteúdo (AdSense não carregado): slot invisível, sem ocupar espaço */
+.ad-slot {
+  width: 100%;
+  background: transparent;
+}
+
+/* Com conteúdo real: reserva espaço e centraliza o anúncio */
+.ad-slot:not(:empty) {
+  min-height: 90px;
+  margin: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ad-slot--sidebar {
+  position: sticky;
+  top: 80px;
+}
+
+.ad-slot--sidebar:not(:empty) {
+  width: 256px;
+  min-height: 250px;
+}
+
+/* Fundo levemente mais claro para páginas de texto longo */
+.page-reading {
+  background-color: #0d2118;
+}
+
+/* ─── Timeline de especialidades (sobre.astro) ───────────────────────── */
+
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0.625rem;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 2px;
+  background: linear-gradient(180deg, #00c896 0%, rgba(0, 200, 150, 0.1) 100%);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2.5rem;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -1.625rem;
+  top: 0.375rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #00c896;
+  border: 2px solid #0a1a16;
+  box-shadow: 0 0 0 3px rgba(0, 200, 150, 0.2);
+}

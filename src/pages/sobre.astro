@@ -1,0 +1,212 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Quem Somos"
+  description="Conheça Thiago Abreu, Analista de Sistemas EDI e fundador do Pulso Tecnológico — o blog de tecnologia B2B em português."
+>
+  <!-- Hero -->
+  <div class="relative overflow-hidden bg-[#0f2420] border-b border-[#00c896]/10">
+    <div class="absolute inset-0 bg-gradient-to-br from-[#00c896]/5 via-transparent to-transparent pointer-events-none" aria-hidden="true"></div>
+    <div class="max-w-4xl mx-auto px-4 py-20 text-center relative">
+      <p class="text-[#00c896] text-xs font-bold uppercase tracking-widest mb-6">Quem Somos</p>
+      <h1 class="text-4xl md:text-5xl font-bold text-[#e8f4f0] mb-6 leading-tight">
+        O coração por trás do<br />
+        <em class="text-[#e8f4f0] not-italic font-serif italic">Pulso</em>
+        <span class="text-[#00c896]"> Tecnológico</span>
+      </h1>
+      <p class="text-[#c8d8d0] text-lg max-w-2xl mx-auto leading-relaxed">
+        Tecnologia explicada por quem vive ela no dia a dia — sem hype, sem copiar blog do blog,
+        com a profundidade de quem trabalha com integração de sistemas há anos.
+      </p>
+    </div>
+  </div>
+
+  <div class="max-w-3xl mx-auto px-4 py-16">
+
+    <!-- Card do autor -->
+    <div class="bg-[#0f2420] rounded-2xl p-8 md:p-10 mb-14 flex flex-col sm:flex-row items-center sm:items-start gap-7 border border-[#00c896]/10">
+      <!-- Avatar placeholder circular -->
+      <div class="shrink-0">
+        <div
+          class="w-24 h-24 rounded-full bg-[#0a1a16] border-2 border-[#00c896]/40 flex items-center justify-center text-[#00c896] font-bold text-2xl"
+          aria-label="Avatar de Thiago Abreu"
+        >
+          TA
+        </div>
+        <p class="text-[#c8d8d0]/50 text-xs text-center mt-2">foto em breve</p>
+      </div>
+      <div class="text-center sm:text-left">
+        <h2 class="text-2xl font-bold text-[#e8f4f0] mb-1">Thiago "Tabreu" Abreu</h2>
+        <p class="text-[#00c896] text-sm font-semibold mb-4">Fundador & Analista de Sistemas EDI</p>
+        <p class="text-[#c8d8d0] leading-relaxed text-sm">
+          Especialista em integração B2B, Electronic Data Interchange (EDI) e automação de
+          processos empresariais. Trabalho conectando sistemas, traduzindo complexidade técnica
+          em soluções práticas, e agora compartilhando esse conhecimento aqui.
+        </p>
+      </div>
+    </div>
+
+    <!-- Seção: Minha Jornada -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-[#e8f4f0] mb-5 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-[#00c896]/10 border border-[#00c896]/20 flex items-center justify-center text-[#00c896] text-sm font-bold shrink-0">01</span>
+        Minha Jornada
+      </h2>
+      <div class="text-[#c8d8d0] leading-relaxed space-y-4">
+        <p>
+          Comecei na área de TI fascinado pelo desafio de fazer sistemas diferentes "conversarem entre si".
+          Essa fascinação me levou diretamente para o mundo do EDI — uma tecnologia que, por fora, parece
+          antiquada, mas por dentro é o tecido invisível que conecta as maiores cadeias de suprimento do mundo.
+        </p>
+        <p>
+          Ao longo dos anos, implementei e mantive integrações EDI para empresas dos mais variados setores:
+          varejo, indústria, logística, farmacêutico. Cada projeto trouxe um novo desafio — um padrão
+          diferente, um parceiro com regras específicas, um sistema legado cheio de particularidades.
+          E aprendi que a documentação raramente conta toda a história.
+        </p>
+        <p>
+          Foi aí que nasceu a ideia do Pulso Tecnológico: um lugar onde eu pudesse escrever o tipo de
+          conteúdo que eu mesmo gostaria de ter encontrado quando estava aprendendo.
+        </p>
+      </div>
+    </section>
+
+    <!-- Seção: Por que o Pulso Tecnológico? -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-[#e8f4f0] mb-5 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-[#00c896]/10 border border-[#00c896]/20 flex items-center justify-center text-[#00c896] text-sm font-bold shrink-0">02</span>
+        Por que o Pulso Tecnológico?
+      </h2>
+      <div class="text-[#c8d8d0] leading-relaxed space-y-4">
+        <p>
+          Existem muitos blogs de tecnologia em inglês. Bons, detalhados, atualizados. Em português,
+          o conteúdo técnico de qualidade ainda é escasso — especialmente sobre temas como EDI e integração
+          B2B, que as grandes empresas brasileiras usam todos os dias, mas que raramente aparecem em
+          conteúdo acessível.
+        </p>
+        <p>
+          O Pulso Tecnológico existe para preencher essa lacuna. Aqui você não vai encontrar artigos
+          genéricos traduzidos do inglês. Vai encontrar análises baseadas em experiência real, com
+          exemplos práticos, na língua que você pensa melhor.
+        </p>
+      </div>
+    </section>
+
+    <!-- Seção: O Que Você Encontra Aqui -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-[#e8f4f0] mb-6 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-[#00c896]/10 border border-[#00c896]/20 flex items-center justify-center text-[#00c896] text-sm font-bold shrink-0">03</span>
+        O Que Você Encontra Aqui
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {[
+          {
+            name: 'EDI',
+            href: '/categoria/edi',
+            icon: '⇄',
+            accent: 'text-cyan-300',
+            border: 'hover:border-cyan-500/30',
+            desc: 'Electronic Data Interchange, AS2, EDIFACT, X12 e integração B2B com profundidade técnica real.',
+          },
+          {
+            name: 'Produtividade',
+            href: '/categoria/produtividade',
+            icon: '◎',
+            accent: 'text-amber-300',
+            border: 'hover:border-amber-500/30',
+            desc: 'Ferramentas de IA, automação e métodos para trabalhar com mais foco e menos atrito.',
+          },
+          {
+            name: 'Tecnologia',
+            href: '/categoria/tecnologia',
+            icon: '◈',
+            accent: 'text-violet-300',
+            border: 'hover:border-violet-500/30',
+            desc: 'Tendências, análises e tutoriais sobre o mundo tech que importa para quem trabalha na área.',
+          },
+        ].map((cat) => (
+          <a
+            href={cat.href}
+            class={`bg-[#0f2420] rounded-xl p-5 border border-[#0f2420] ${cat.border} transition-all block group`}
+          >
+            <span class="text-2xl mb-3 block" aria-hidden="true">{cat.icon}</span>
+            <h3 class={`font-bold mb-2 ${cat.accent}`}>{cat.name}</h3>
+            <p class="text-[#c8d8d0] text-sm leading-relaxed">{cat.desc}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Seção: Especialidades (timeline) -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-[#e8f4f0] mb-8 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-[#00c896]/10 border border-[#00c896]/20 flex items-center justify-center text-[#00c896] text-sm font-bold shrink-0">04</span>
+        Especialidades
+      </h2>
+      <div class="timeline">
+        {[
+          {
+            title: 'EDI & Integração B2B',
+            desc: 'Implementação e manutenção de integrações EDI com padrões ANSI X12, EDIFACT e protocolos AS2/SFTP. Experiência com parceiros como grandes varejistas e indústrias.',
+          },
+          {
+            title: 'Sistemas Legados',
+            desc: 'Diagnóstico, documentação e modernização de integrações antigas — incluindo XSLT, PL/SQL e ERPs dos anos 90/2000 que ainda movem operações críticas.',
+          },
+          {
+            title: 'Automação de Processos',
+            desc: 'Identificação de gargalos e implementação de automações práticas que reduzem trabalho manual sem exigir grandes investimentos em infraestrutura.',
+          },
+          {
+            title: 'Conteúdo Técnico em Português',
+            desc: 'Tradução de conceitos complexos em linguagem acessível para quem precisa aprender e implementar, sem depender de conteúdo em inglês.',
+          },
+        ].map((item) => (
+          <div class="timeline-item">
+            <div class="bg-[#0f2420] rounded-xl p-5 border border-[#0f2420] hover:border-[#00c896]/20 transition-all">
+              <h3 class="text-[#e8f4f0] font-semibold mb-2">{item.title}</h3>
+              <p class="text-[#c8d8d0] text-sm leading-relaxed">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Seção: Compromisso com a Verdade -->
+    <section class="mb-14">
+      <h2 class="text-2xl font-bold text-[#e8f4f0] mb-5 flex items-center gap-3">
+        <span class="w-8 h-8 rounded-lg bg-[#00c896]/10 border border-[#00c896]/20 flex items-center justify-center text-[#00c896] text-sm font-bold shrink-0">05</span>
+        Compromisso com a Verdade
+      </h2>
+      <div class="text-[#c8d8d0] leading-relaxed space-y-4">
+        <p>
+          Nenhum artigo aqui é patrocinado sem aviso claro. Nenhuma ferramenta é recomendada porque
+          paga comissão — só porque funciona de verdade. Quando eu erro, corrijo e documento a correção.
+        </p>
+        <p>
+          Se você encontrar algo desatualizado ou incorreto, me manda uma mensagem. Prefiro ser
+          corrigido do que manter informação errada no ar.
+        </p>
+      </div>
+    </section>
+
+    <!-- Assinatura + CTA -->
+    <div class="bg-[#0f2420] rounded-2xl p-8 border border-[#00c896]/10 text-center">
+      <p class="text-[#c8d8d0] italic mb-2">"Tecnologia que conecta sistemas e pessoas."</p>
+      <p class="text-[#e8f4f0] font-bold">Thiago "Tabreu" Abreu</p>
+      <p class="text-[#00c896] text-sm mb-6">Fundador & Analista de Sistemas</p>
+      <a
+        href="/contato"
+        class="inline-flex items-center gap-2 bg-[#00c896] hover:bg-[#00e5a0] text-[#0a1a16] font-bold px-8 py-3 rounded-full transition-colors duration-200"
+      >
+        Entre em Contato
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</BaseLayout>

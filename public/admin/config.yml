@@ -1,0 +1,32 @@
+backend:
+  name: github
+  repo: TkAbreu/pulso-tecnologico
+  branch: main
+  base_url: https://pulso-cms-auth.vercel.app
+
+locale: pt
+
+media_folder: public/images/posts
+public_folder: /images/posts
+
+collections:
+  - name: blog
+    label: Posts
+    folder: src/content/blog
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Título, name: title, widget: string }
+      - { label: Descrição SEO, name: description, widget: text }
+      - { label: Data, name: date, widget: datetime, format: "YYYY-MM-DD" }
+      - { label: Capa, name: cover, widget: image }
+      - label: Categoria
+        name: category
+        widget: select
+        options: ["EDI", "Produtividade", "Tecnologia"]
+      - { label: Tags, name: tags, widget: list }
+      - { label: Autor, name: author, widget: string, default: "Thiago Abreu" }
+      - { label: Tempo de leitura (min), name: readTime, widget: number, default: 5 }
+      - { label: Post em destaque, name: featured, widget: boolean, default: false }
+      - { label: Rascunho, name: draft, widget: boolean, default: false }
+      - { label: Conteúdo, name: body, widget: markdown }
